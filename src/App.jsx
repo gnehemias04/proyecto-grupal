@@ -16,11 +16,6 @@ function App() {
   return (
     <div>
       <h1>Meals</h1>
-      <ul>
-        {data.map((meal) => (
-          <li key={meal.idMeal}>{meal.strMeal}</li>
-        ))}
-      </ul>
     </div>
   );
 }
