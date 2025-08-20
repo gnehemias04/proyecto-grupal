@@ -31,7 +31,10 @@ export default function Footer() {
             required
             class="w-full rounded-md resize-none text-gray-800 border border-white p-3 sm:w-72 focus:outline-none"
           ></textarea>
-          <button className="bg-white text-[#619746] font-semibold px-6 py-3 rounded-md hover:bg-gray-100 cursor-pointer">
+          <button
+            type="submit"
+            className="bg-white text-[#619746] font-semibold px-6 py-3 rounded-md hover:bg-gray-100 cursor-pointer"
+          >
             Contáctanos
           </button>
         </form>
