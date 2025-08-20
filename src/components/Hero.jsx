@@ -37,7 +37,7 @@ export default function Hero() {
       {randomMeals.map((meal, index) => (
         <div
           key={meal.idMeal}
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+          className={` absolute inset-0 transition-opacity duration-1000 ease-in-out ${
             index === current ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
         >
