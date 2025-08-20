@@ -1,3 +1,4 @@
+import Header from "./components/Header";
 import useApi from "./useApi";
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
 
   return (
     <div>
-      <h1>Meals</h1>
+      <h1>Mealssss</h1>
+      <Header />
     </div>
   );
 }
