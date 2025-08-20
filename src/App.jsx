@@ -1,3 +1,4 @@
+import Header from "./components/Header";
 import useApi from "./useApi";
 import Hero from "./components/Hero";
 
@@ -16,8 +17,10 @@ function App() {
 
   return (
     <div>
-      <Hero meals={data} />
-      <h1>Meals</h1>
+
+      <Header />
+    <Hero meals={data} />
+
     </div>
   );
 }
