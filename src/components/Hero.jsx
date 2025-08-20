@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
+import useApi from "../useApi";
 
-export default function Hero({ meals }) {
+export default function Hero() {
+  let url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood";
+  const { data, loading, error } = useApi(url);
+
   const [randomMeals, setRandomMeals] = useState([]);
   const [current, setCurrent] = useState(0);
 
   // Generar comidas aleatorias solo cuando cambian las props
   useEffect(() => {
-    if (!meals || meals.length === 0) return;
-    const shuffled = [...meals].sort(() => 0.5 - Math.random());
+    if (!data || data.length === 0) return;
+    const shuffled = [...data].sort(() => 0.5 - Math.random());
     setRandomMeals(shuffled.slice(0, 3));
-  }, [meals]);
+  }, [data]);
 
   // Cambio automático de slide
   useEffect(() => {

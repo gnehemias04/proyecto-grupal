@@ -8,19 +8,19 @@ function App() {
 
   if (loading)
     return (
-      <img
-        src="https://i.pinimg.com/originals/1d/69/6f/1d696f941d33a44dad5dd921c9a29215.gif"
-        alt=""
-      />
+      <div className="w-screen h-screen flex justify-center item">
+        <img
+          src="https://i.pinimg.com/originals/1d/69/6f/1d696f941d33a44dad5dd921c9a29215.gif"
+          alt=""
+        />
+      </div>
     );
   if (error) return <h2>Error: {error.message}</h2>;
 
   return (
     <div>
-
       <Header />
-    <Hero meals={data} />
-
+      <Hero />
     </div>
   );
 }
