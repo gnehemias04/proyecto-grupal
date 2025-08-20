@@ -1,3 +1,6 @@
+import Carrusell from "./components/Carrusell";
+import CarrusellBanderas from "./components/CarrusellBanderas";
+/* import Carrusell from "./components/CarrusellBanderas"; */
 import useApi from "./useApi";
 
 function App() {
@@ -16,6 +19,10 @@ function App() {
   return (
     <div>
       <h1>Mealssss</h1>
+      <div>
+        <Carrusell />
+        <CarrusellBanderas />
+      </div>
     </div>
   );
 }
