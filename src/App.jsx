@@ -1,3 +1,4 @@
+import Card from "./components/card";
 import useApi from "./useApi";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
   return (
     <div>
       <h1>Mealssss</h1>
+      <Card></Card>
     </div>
   );
 }
