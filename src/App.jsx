@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import useApi from "./useApi";
+import Hero from "./components/Hero";
 
 function App() {
   let url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood";
@@ -16,8 +17,10 @@ function App() {
 
   return (
     <div>
-      <h1>Mealssss</h1>
+
       <Header />
+    <Hero meals={data} />
+
     </div>
   );
 }
