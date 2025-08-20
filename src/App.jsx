@@ -1,3 +1,7 @@
+import Carrusell from "./components/Carrusell";
+import CarrusellBanderas from "./components/CarrusellBanderas";
+/* import Carrusell from "./components/CarrusellBanderas"; */
+
 import Header from "./components/Header";
 import useApi from "./useApi";
 import Hero from "./components/Hero";
@@ -19,8 +23,12 @@ function App() {
 
   return (
     <div>
-      <Header />
+    <Header />
       <Hero />
+      <div>
+        <Carrusell />
+        <CarrusellBanderas />
+      </div>
     </div>
   );
 }
