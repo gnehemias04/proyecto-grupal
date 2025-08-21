@@ -17,7 +17,7 @@ export default function Footer() {
           id="contact"
           action="https://formsubmit.co/yamirngifo18@gmail.com"
           method="POST"
-          class="flex flex-col  w-full sm:w-auto gap-2 mt-4 md:mt-0"
+          className="flex flex-col  w-full sm:w-auto gap-2 mt-4 md:mt-0"
         >
           <input
             type="email"
@@ -29,7 +29,7 @@ export default function Footer() {
             rows="5"
             placeholder="Chat Here"
             required
-            class="w-full rounded-md resize-none text-gray-800 border border-white p-3 sm:w-72 focus:outline-none"
+            className="w-full rounded-md resize-none text-gray-800 border border-white p-3 sm:w-72 focus:outline-none"
           ></textarea>
           <button
             type="submit"
