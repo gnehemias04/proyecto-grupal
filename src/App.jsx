@@ -1,7 +1,7 @@
+import Card from "./components/card";
 import Cards from "./components/Cards";
 import Carrusell from "./components/Carrusell";
 import CarrusellBanderas from "./components/CarrusellBanderas";
-/* import Carrusell from "./components/CarrusellBanderas"; */
 
 import Header from "./components/Header";
 import useApi from "./useApi";
@@ -31,10 +31,10 @@ function App() {
         <Carrusell />
         <CarrusellBanderas />
         <Cards />
+    <Card/>
       </div>
       </div>
       <Footer />
-
     </div>
   );
 }
