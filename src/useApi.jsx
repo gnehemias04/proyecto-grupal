@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function useApi(url) {
+export default function useApi(url, dataPath = "data") {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,7 +11,11 @@ export default function useApi(url) {
     axios
       .get(url)
       .then((res) => {
-        setData(res.data.meals);
+        // Acceder a los datos de forma dinámica según el path proporcionado
+        const dataValue = dataPath
+          .split(".")
+          .reduce((obj, key) => obj && obj[key], res.data);
+        setData(dataValue || []);
         setError(null);
       })
       .catch((err) => {
@@ -19,7 +23,7 @@ export default function useApi(url) {
         setData([]);
       })
       .finally(() => setLoading(false));
-  }, [url]);
+  }, [url, dataPath]);
 
   return { data, loading, error };
 }
