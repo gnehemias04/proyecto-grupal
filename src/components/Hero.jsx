@@ -3,7 +3,7 @@ import useApi from "../useApi";
 
 export default function Hero() {
   let url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood";
-  const { data, loading, error } = useApi(url);
+  const { data, loading, error } = useApi(url, "meals");
 
   const [randomMeals, setRandomMeals] = useState([]);
   const [current, setCurrent] = useState(0);

@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div>
-    <Header />
+      <Header />
       <Hero />
       <div>
         <Carrusell />
