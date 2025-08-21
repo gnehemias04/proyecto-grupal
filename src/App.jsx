@@ -30,7 +30,7 @@ function App() {
         <Carrusell />
         <CarrusellBanderas />
       </div>
-    <Footer/>
+      <Footer />
     </div>
   );
 }
