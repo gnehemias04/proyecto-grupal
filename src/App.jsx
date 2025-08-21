@@ -1,3 +1,12 @@
+<<<<<<< Updated upstream
+=======
+import Carrusell from "./components/Carrusell";
+import CarrusellBanderas from "./components/CarrusellBanderas";
+import Cards from "./components/Cards";
+/* import Carrusell from "./components/CarrusellBanderas"; */
+
+import Header from "./components/Header";
+>>>>>>> Stashed changes
 import useApi from "./useApi";
 
 function App() {
@@ -15,7 +24,17 @@ function App() {
 
   return (
     <div>
+<<<<<<< Updated upstream
       <h1>Meals</h1>
+=======
+      <Header />
+      <Hero />
+      <div>
+        <Carrusell />
+        <CarrusellBanderas />
+        <Cards />
+      </div>
+>>>>>>> Stashed changes
     </div>
   );
 }
