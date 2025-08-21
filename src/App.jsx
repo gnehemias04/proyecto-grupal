@@ -1,4 +1,3 @@
-import Card from "./components/card";
 import Cards from "./components/Cards";
 import Carrusell from "./components/Carrusell";
 import CarrusellBanderas from "./components/CarrusellBanderas";
@@ -31,8 +30,6 @@ function App() {
         <Carrusell />
         <CarrusellBanderas />
         <Cards />
-    <Card/>
-      </div>
       </div>
       <Footer />
     </div>

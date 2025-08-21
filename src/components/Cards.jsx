@@ -1,11 +1,12 @@
-import useApi from "./useApi";
+import { data } from "react-router";
+import useApi from "../useApi";
 
 export default function Cards() {
   const {
     data: meals,
     loading,
     error,
-  } = useApi("https://www.themealdb.com/api/json/v1/1/search.php?s=");
+  } = useApi("https://www.themealdb.com/api/json/v1/1/search.php?s=", "meals");
 
   if (loading) {
     return <p className="text-center py-10">Cargando comidas...</p>;
@@ -28,17 +29,23 @@ export default function Cards() {
 
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 mt-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
           {meals.map((meal) => (
-            <a key={meal.idMeal} href="#" className="group">
-              <img
-                src={meal.strMealThumb}
-                alt={meal.strMeal}
-                className="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8"
-              />
-              <h3 className="mt-4 text-sm text-gray-700">{meal.strMeal}</h3>
-              <p className="mt-1 text-lg font-medium text-gray-900">
-                {meal.strArea} • {meal.strCategory}
-              </p>
-            </a>
+            <div className="relative hover:scale-110 transition-all duration-1000">
+              <div className="relative">
+                <img
+                  src={meal.strMealThumb}
+                  alt={meal.strMeal}
+                  className="bg-cover rounded-2xl"
+                />
+                <h2 className="text-2xl text-white absolute text-end bottom-4 m-4">
+                  {meal.strMeal}
+                </h2>
+              </div>
+              <div className="absolute inset-0 rounded-2xl opacity-0 hover:opacity-100 trancition-all duration-500 bg-[#83ba67] flex flex-col justify-center items-center text-white font-bold gap-10">
+                <h2 className="text-2xl ">{meal.strMeal}</h2>
+                <p className="text-xl">{meal.strArea} </p>
+                <p className="text-xl">{meal.strCategory}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>
