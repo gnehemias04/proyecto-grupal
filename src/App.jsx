@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Cards from "./components/Cards";
 import Carrusell from "./components/Carrusell";
 import CarrusellBanderas from "./components/CarrusellBanderas";
@@ -7,12 +6,12 @@ import Header from "./components/Header";
 import useApi from "./useApi";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
+import { useState } from "react";
 
 function App() {
   const [categoria, setCategoria] = useState(null);
   const [area, setArea] = useState(null);
 
-  // Construcción dinámica del endpoint
   let url = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
 
   if (categoria) {
@@ -20,11 +19,14 @@ function App() {
   } else if (area) {
     url = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`;
   } else {
-    // 👇 ya no usas "let" otra vez, solo reasignas
     url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood";
   }
-
+  const [search, setSearch] = useState(false);
   const { loading, error } = useApi(url);
+  const [searchPrincipal, setSearchPrincipal] = useState("");
+  let url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood";
+  const { data, loading, error } = useApi(url);
+
 
   if (loading)
     return (
@@ -39,7 +41,12 @@ function App() {
 
   return (
     <div>
-      <Header />
+      <Header
+        search={search}
+        setSearch={setSearch}
+        searchPrincipal={searchPrincipal}
+        setSearchPrincipal={setSearchPrincipal}
+      />
       <Hero />
       <div>
         <Carrusell
@@ -56,8 +63,7 @@ function App() {
         >
           Quitar filtro
         </button>
-
-        <Cards url={url} />
+        <Cards searchPrincipal={searchPrincipal} url={url} />
       </div>
       <Footer />
     </div>

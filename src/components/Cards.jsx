@@ -1,6 +1,6 @@
 import useApi from "../useApi";
 
-export default function Cards({ url }) {
+export default function Cards({ searchPrincipal, url }) {
   const { data: meals, loading, error } = useApi(url, "meals");
 
   if (loading) {
@@ -30,16 +30,20 @@ export default function Cards({ url }) {
             >
               <div className="relative">
                 <img
-                  src={meal.strMealThumb}
+                  src={
+                    meal.strMealThumb
+                      ? meal.strMealThumb
+                      : "https://www.cinco8.com/wp-content/uploads/2020/08/404.png"
+                  }
                   alt={meal.strMeal}
                   className="bg-cover rounded-2xl"
                 />
-                <h2 className="text-2xl text-white absolute text-end bottom-4 m-4">
+                <h2 className="text-2xl text-white p-2 px-4 bg-black/60 rounded-2xl absolute text-end bottom-4 m-4">
                   {meal.strMeal}
                 </h2>
               </div>
               <div className="absolute inset-0 rounded-2xl opacity-0 hover:opacity-100 trancition-all duration-500 bg-[#83ba67] flex flex-col justify-center items-center text-white font-bold gap-10">
-                <h2 className="text-2xl ">{meal.strMeal}</h2>
+                <h2 className="text-2xl text-center mx-3">{meal.strMeal}</h2>
                 <p className="text-xl">{meal.strArea} </p>
                 <p className="text-xl">{meal.strCategory}</p>
               </div>
