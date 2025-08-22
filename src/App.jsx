@@ -1,41 +1,55 @@
-import Cards from "./components/Cards";
-import Carrusell from "./components/Carrusell";
-import CarrusellBanderas from "./components/CarrusellBanderas";
-
-import Header from "./components/Header";
-import useApi from "./useApi";
-import Hero from "./components/Hero";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Home from "./pages/Home";
+import DetailFood from "./components/DetailFood";
 import Footer from "./components/Footer";
-import { useState } from "react";
+import Header from "./components/Header";
+
+// Componente para hacer scroll al top al cambiar de ruta
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 function App() {
   const [searchPrincipal, setSearchPrincipal] = useState("");
-  let url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood";
-  const { data, loading, error } = useApi(url);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedArea, setSelectedArea] = useState("");
 
-  if (loading)
-    return (
-      <div className="w-screen h-screen flex justify-center item">
-        <img
-          src="https://i.pinimg.com/originals/1d/69/6f/1d696f941d33a44dad5dd921c9a29215.gif"
-          alt=""
-        />
-      </div>
-    );
-  if (error) return <h2>Error: {error.message}</h2>;
+  const resetFilters = () => {
+    setSelectedCategory("");
+    setSelectedArea("");
+    setSearchPrincipal("");
+  };
 
   return (
     <div>
+      <ScrollToTop />
       <Header
         searchPrincipal={searchPrincipal}
         setSearchPrincipal={setSearchPrincipal}
       />
-      <Hero />
-      <div>
-        <Carrusell />
-        <CarrusellBanderas />
-        <Cards searchPrincipal={searchPrincipal} />
-      </div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              searchPrincipal={searchPrincipal}
+              selectedCategory={selectedCategory}
+              selectedArea={selectedArea}
+              setSelectedCategory={setSelectedCategory}
+              setSelectedArea={setSelectedArea}
+              resetFilters={resetFilters}
+            />
+          }
+        />
+        <Route path="/meal/:id" element={<DetailFood />} />
+      </Routes>
       <Footer />
     </div>
   );

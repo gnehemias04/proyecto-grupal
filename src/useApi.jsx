@@ -8,18 +8,18 @@ export default function useApi(url, dataPath = "data") {
 
   useEffect(() => {
     setLoading(true);
+    setError(null);
+
     axios
       .get(url)
       .then((res) => {
-        // Acceder a los datos de forma dinámica según el path proporcionado
         const dataValue = dataPath
           .split(".")
           .reduce((obj, key) => obj && obj[key], res.data);
         setData(dataValue || []);
-        setError(null);
       })
       .catch((err) => {
-        setError(err);
+        setError(err.message || "Error al cargar los datos");
         setData([]);
       })
       .finally(() => setLoading(false));

@@ -1,13 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import useApi from "../useApi";
 
-const CarrusellBanderas = () => {
+const CarrusellBanderas = ({ setSelectedArea, resetFilters }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const carouselRef = useRef(null);
 
-  // Usar el custom hook para obtener las áreas/países
   const {
     data: areas,
     loading,
@@ -17,7 +16,6 @@ const CarrusellBanderas = () => {
     "meals"
   );
 
-  // Mapeo de países a códigos de bandera
   const paisesACodigos = {
     American: "us",
     British: "gb",
@@ -51,13 +49,41 @@ const CarrusellBanderas = () => {
     Filipino: "ph",
   };
 
-  // Manejadores de eventos para arrastrar
+  // Efecto para el desplazamiento automático infinito
+  useEffect(() => {
+    if (!areas || areas.length === 0 || isDragging) return;
+
+    const carousel = carouselRef.current;
+    let animationFrameId;
+    let autoScrollSpeed = 0.8; // Velocidad un poco más rápida para banderas
+
+    const animateScroll = () => {
+      if (carousel) {
+        carousel.scrollLeft += autoScrollSpeed;
+
+        // Reiniciar scroll cuando llegue al final
+        if (
+          carousel.scrollLeft >=
+          carousel.scrollWidth - carousel.clientWidth
+        ) {
+          carousel.scrollLeft = 0;
+        }
+
+        animationFrameId = requestAnimationFrame(animateScroll);
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(animateScroll);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [areas, isDragging]);
+
   const handleMouseDown = (e) => {
     setIsDragging(true);
     setStartX(e.pageX - carouselRef.current.offsetLeft);
     setScrollLeft(carouselRef.current.scrollLeft);
-
-    // Prevenir selección de texto
     e.preventDefault();
     carouselRef.current.style.userSelect = "none";
     carouselRef.current.style.cursor = "grabbing";
@@ -85,7 +111,20 @@ const CarrusellBanderas = () => {
     carouselRef.current.scrollLeft = scrollLeft - walk;
   };
 
-  // Si hay error
+  const handleAreaClick = (areaName) => {
+    resetFilters();
+    setSelectedArea(areaName);
+    setTimeout(() => {
+      const cardsSection = document.getElementById("cards-section");
+      if (cardsSection) {
+        cardsSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 100);
+  };
+
   if (error) {
     return (
       <div className="w-full px-2 md:px-4 py-6 md:py-8 bg-gray-50">
@@ -96,7 +135,6 @@ const CarrusellBanderas = () => {
     );
   }
 
-  // Mostrar skeleton mientras carga
   if (loading) {
     return (
       <div className="w-full px-2 md:px-4 py-6 md:py-8 bg-gray-50">
@@ -117,7 +155,6 @@ const CarrusellBanderas = () => {
     );
   }
 
-  // Verificar que areas existe y es un array
   if (!areas || !Array.isArray(areas) || areas.length === 0) {
     return (
       <div className="w-full px-2 md:px-4 py-6 md:py-8 bg-gray-50">
@@ -128,8 +165,11 @@ const CarrusellBanderas = () => {
     );
   }
 
+  // Duplicar áreas para efecto infinito (como en Carrusell.jsx)
+  const duplicatedAreas = [...areas, ...areas, ...areas];
+
   return (
-    <div className="w-full  bg-gray-50">
+    <div className="w-full bg-gray-50">
       <div
         ref={carouselRef}
         className="flex overflow-x-auto space-x-4 md:space-x-6 pb-3 px-2 cursor-grab scrollbar-hide select-none"
@@ -139,14 +179,15 @@ const CarrusellBanderas = () => {
         onMouseMove={handleMouseMove}
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
-        {areas.map((area, index) => {
+        {duplicatedAreas.map((area, index) => {
           const codigoPais = paisesACodigos[area.strArea] || "un";
           const urlBandera = `https://flagcdn.com/w80/${codigoPais}.png`;
 
           return (
             <div
               key={`${area.strArea}-${index}`}
-              className="flex-shrink-0 w-24 bg-gray-200 rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center select-none"
+              className="flex-shrink-0 w-24 bg-gray-200 rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center select-none cursor-pointer"
+              onClick={() => handleAreaClick(area.strArea)}
             >
               <div className="h-15 w-20 md:w-28 overflow-hidden flex items-center justify-center px-2 pt-2">
                 <img
