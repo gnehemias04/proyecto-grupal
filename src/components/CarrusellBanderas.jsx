@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import useApi from "../useApi";
 
-const CarrusellBanderas = () => {
+const CarrusellBanderas = ({ onSelectArea, areaActiva }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
@@ -139,13 +139,14 @@ const CarrusellBanderas = () => {
         onMouseMove={handleMouseMove}
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
-        {areas.map((area, index) => {
+        {/* {areas.map((area, index) => {
           const codigoPais = paisesACodigos[area.strArea] || "un";
           const urlBandera = `https://flagcdn.com/w80/${codigoPais}.png`;
 
           return (
             <div
               key={`${area.strArea}-${index}`}
+              onClick={() => onSelectArea(area.strArea)}
               className="flex-shrink-0 w-24 bg-gray-200 rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center select-none"
             >
               <div className="h-15 w-20 md:w-28 overflow-hidden flex items-center justify-center px-2 pt-2">
@@ -163,6 +164,27 @@ const CarrusellBanderas = () => {
                 <h3 className="font-semibold text-xs md:text-sm text-gray-800 select-none">
                   {area.strArea}
                 </h3>
+              </div>
+            </div>
+          );
+        })} */}
+        {areas.map((area, index) => {
+          const codigoPais = paisesACodigos[area.strArea] || "un";
+          const urlBandera = `https://flagcdn.com/w80/${codigoPais}.png`;
+          const activa = areaActiva === area.strArea;
+          return (
+            <div
+              key={`${area.strArea}-${index}`}
+              onClick={() => onSelectArea(area.strArea)}
+              className={`flex-shrink-0 w-24 rounded-lg shadow-md cursor-pointer transition-transform duration-300 
+              ${activa ? "border-4 border-blue-500 scale-105" : "bg-gray-200"}
+            `}
+            >
+              <div className="h-15 w-20 flex items-center justify-center px-2 pt-2">
+                <img src={urlBandera} alt={area.strArea} />
+              </div>
+              <div className="p-1 text-center">
+                <h3 className="font-semibold text-xs">{area.strArea}</h3>
               </div>
             </div>
           );

@@ -1,12 +1,7 @@
-import { data } from "react-router";
 import useApi from "../useApi";
 
-export default function Cards() {
-  const {
-    data: meals,
-    loading,
-    error,
-  } = useApi("https://www.themealdb.com/api/json/v1/1/search.php?s=", "meals");
+export default function Cards({ url }) {
+  const { data: meals, loading, error } = useApi(url, "meals");
 
   if (loading) {
     return <p className="text-center py-10">Cargando comidas...</p>;
@@ -29,7 +24,10 @@ export default function Cards() {
 
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 mt-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
           {meals.map((meal) => (
-            <div className="relative hover:scale-110 transition-all duration-1000">
+            <div
+              key={meal.idMeal}
+              className="relative hover:scale-110 transition-all duration-1000"
+            >
               <div className="relative">
                 <img
                   src={meal.strMealThumb}

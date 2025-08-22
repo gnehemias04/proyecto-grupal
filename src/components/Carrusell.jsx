@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import useApi from "../useApi";
 
-const Carrusell = () => {
+const Carrusell = ({ onSelectCategoria, categoriaActiva }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
@@ -151,9 +151,10 @@ const Carrusell = () => {
         onMouseMove={handleMouseMove}
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
-        {duplicatedCategories.map((category, index) => (
+        {/* {duplicatedCategories.map((category, index) => (
           <div
             key={`${category.idCategory}-${index}`}
+            onClick={() => onSelectCategoria(category.strCategory)}
             className="flex-shrink-0 w-36 md:w-48 bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-lg select-none"
           >
             <div className="h-28 md:h-40 overflow-hidden flex items-center justify-center bg-gray-100">
@@ -170,7 +171,32 @@ const Carrusell = () => {
               </h3>
             </div>
           </div>
-        ))}
+        ) */}
+        {duplicatedCategories.map((category, index) => {
+          const activa = categoriaActiva === category.strCategory;
+          return (
+            <div
+              key={`${category.idCategory}-${index}`}
+              onClick={() => onSelectCategoria(category.strCategory)}
+              className={`flex-shrink-0 w-36 md:w-48 rounded-lg shadow-md cursor-pointer transition-transform duration-300 
+              ${activa ? "border-4 border-green-500 scale-105" : "bg-white"}
+            `}
+            >
+              <div className="h-28 flex items-center justify-center bg-gray-100">
+                <img
+                  src={category.strCategoryThumb}
+                  alt={category.strCategory}
+                  className="max-h-full max-w-full object-contain p-2"
+                />
+              </div>
+              <div className="p-3">
+                <h3 className="font-semibold text-sm md:text-lg text-center">
+                  {category.strCategory}
+                </h3>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
