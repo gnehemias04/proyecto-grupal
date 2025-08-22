@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+
+import Cards from "./components/Cards";
 import Carrusell from "./components/Carrusell";
 import CarrusellBanderas from "./components/CarrusellBanderas";
-/* import Carrusell from "./components/CarrusellBanderas"; */
 
 import Header from "./components/Header";
 import useApi from "./useApi";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
+import { useState } from "react";
 
 function App() {
-  const [search, setSearch] = useState(false);
+  const [searchPrincipal, setSearchPrincipal] = useState("");
   let url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood";
   const { data, loading, error } = useApi(url);
 
@@ -26,11 +27,15 @@ function App() {
 
   return (
     <div>
-      <Header search={search} setSearch={setSearch} />
+      <Header
+        searchPrincipal={searchPrincipal}
+        setSearchPrincipal={setSearchPrincipal}
+      />
       <Hero />
       <div>
         <Carrusell />
         <CarrusellBanderas />
+        <Cards searchPrincipal={searchPrincipal} />
       </div>
       <Footer />
     </div>

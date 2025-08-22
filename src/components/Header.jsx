@@ -1,18 +1,12 @@
-export default function Header({ search, setSearch }) {
+import React from "react";
+import { useState } from "react";
+
+export default function Header({ searchPrincipal, setSearchPrincipal }) {
+  console.log(searchPrincipal);
   return (
     <div>
       <header className="bg-[#83ba67] flex items-center justify-between px-4 py-3 fixed top-0 left-0 w-full z-50">
         <div className="flex items-center justify-center gap-2 md:gap-4">
-          <svg
-            className="w-10 h-10 text-white cursor-pointer"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path strokeLinecap="round" d="M5 7h14M5 12h14M5 17h14" />
-          </svg>
           <img
             src="/images/Cheffcito-Photoroom.webp"
             alt="logo"
@@ -31,7 +25,9 @@ export default function Header({ search, setSearch }) {
           <input
             className="w-full h-10 border-r border-[#ffffff] text-[#ffffff] text-sm px-2 placeholder:text-white focus:outline-none"
             type="text"
-            placeholder="Busca una receta, ingrediente, palabra clave..."
+            placeholder="Busca una receta por nombre..."
+            value={searchPrincipal}
+            onChange={(e) => setSearchPrincipal(e.target.value)}
           />
           <div className="bg-[#83ba67] md:bg-lime-700 h-full">
             <svg
@@ -49,10 +45,6 @@ export default function Header({ search, setSearch }) {
             </svg>
           </div>
         </div>
-        <button className="hidden md:flex justify-center items-center bg-[#ffffff] text-[#83ba67] rounded-full h-10 w-10 text-2xl font-bold">
-          Ó
-        </button>
-        <button onClick={() => setSearch(!search)} className="md:hidden">
           <svg
             className="w-7 h-7 text-white"
             xmlns="http://www.w3.org/2000/svg"
@@ -68,15 +60,20 @@ export default function Header({ search, setSearch }) {
           </svg>
         </button>
       </header>
-      {search && (
-        <div className="md:hidden w-full bg-white px-4 py-2 fixed top-[56px] left-0 z-40 shadow-md">
-          <input
-            type="text"
-            placeholder="Busca una receta, ingrediente, palabra clave..."
-            className="w-full  h-10 bg-transparent text-black text-sm px-2 placeholder:text-gray-500 focus:outline-none focus:ring-0"
-          />
-        </div>
-      )}
+      <input
+        type="checkbox"
+        id="search-toggle"
+        className="hidden peer md:hidden"
+      />
+      <div className="peer-checked:flex hidden md:hidden w-full bg-white px-4 py-2 fixed top-[56px] left-0 z-40 shadow-md">
+        <input
+          type="text"
+          placeholder="Busca una receta por nombre, palabra clave..."
+          className="w-full h-10 bg-transparent text-black text-sm px-2 placeholder:text-gray-500 focus:outline-none focus:ring-0"
+          value={searchPrincipal}
+          onChange={(e) => setSearchPrincipal(e.target.value)}
+        />
+      </div>
     </div>
   );
 }
