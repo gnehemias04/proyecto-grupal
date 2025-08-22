@@ -45,22 +45,20 @@ export default function Header({ searchPrincipal, setSearchPrincipal }) {
             </svg>
           </div>
         </div>
-
-        <label htmlFor="search-toggle" className="md:hidden cursor-pointer">
           <svg
             className="w-7 h-7 text-white"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            stroke-width="2"
+            strokeWidth="2"
           >
             <path
-              stroke-linecap="round"
+              strokeLinecap="round"
               d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"
             />
           </svg>
-        </label>
+        </button>
       </header>
       <input
         type="checkbox"
