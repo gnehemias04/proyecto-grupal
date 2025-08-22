@@ -1,12 +1,15 @@
 import { data } from "react-router";
 import useApi from "../useApi";
 
-export default function Cards() {
+export default function Cards({ searchPrincipal }) {
   const {
     data: meals,
     loading,
     error,
-  } = useApi("https://www.themealdb.com/api/json/v1/1/search.php?s=", "meals");
+  } = useApi(
+    `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchPrincipal}`,
+    "meals"
+  );
 
   if (loading) {
     return <p className="text-center py-10">Cargando comidas...</p>;
@@ -41,7 +44,7 @@ export default function Cards() {
                 </h2>
               </div>
               <div className="absolute inset-0 rounded-2xl opacity-0 hover:opacity-100 trancition-all duration-500 bg-[#83ba67] flex flex-col justify-center items-center text-white font-bold gap-10">
-                <h2 className="text-2xl ">{meal.strMeal}</h2>
+                <h2 className="text-2xl text-center mx-3">{meal.strMeal}</h2>
                 <p className="text-xl">{meal.strArea} </p>
                 <p className="text-xl">{meal.strCategory}</p>
               </div>
