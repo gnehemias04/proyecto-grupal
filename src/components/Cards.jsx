@@ -32,7 +32,11 @@ export default function Cards() {
             <div className="relative hover:scale-110 transition-all duration-1000">
               <div className="relative">
                 <img
-                  src={meal.strMealThumb}
+                  src={
+                    meal.strMealThumb
+                      ? meal.strMealThumb
+                      : "https://www.cinco8.com/wp-content/uploads/2020/08/404.png"
+                  }
                   alt={meal.strMeal}
                   className="bg-cover rounded-2xl"
                 />
