@@ -169,7 +169,7 @@ const CarrusellBanderas = ({ setSelectedArea, resetFilters }) => {
   const duplicatedAreas = [...areas, ...areas, ...areas];
 
   return (
-    <div className="w-full bg-gray-50">
+    <div id="categorias" className="w-full bg-gray-50">
       <div
         ref={carouselRef}
         className="flex overflow-x-auto space-x-4 md:space-x-6 pb-3 px-2 cursor-grab scrollbar-hide select-none"

@@ -69,7 +69,7 @@ const EasyRecipes = () => {
   }
 
   return (
-    <div className="bg-gray-50 pb-12 pt-6  px-4">
+    <div id="recetas-faciles" className="bg-gray-50 pb-12 pt-6  px-4">
       <div className="px-4 mt-16 md:px-15 md:mb-5 md:mt-1">
         {/* Header de la sección */}
         <div className="text-start mb-8">

@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 export default function Footer() {
   const location = useLocation();
@@ -54,7 +54,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-white/90 hover:text-white transition-colors flex items-center"
                 >
                   <span className="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>
@@ -63,7 +63,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#categorias"
                   className="text-white/90 hover:text-white transition-colors flex items-center"
                 >
                   <span className="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>
@@ -72,7 +72,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#categorias"
                   className="text-white/90 hover:text-white transition-colors flex items-center"
                 >
                   <span className="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>
@@ -81,7 +81,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#recetas-faciles"
                   className="text-white/90 hover:text-white transition-colors flex items-center"
                 >
                   <span className="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>

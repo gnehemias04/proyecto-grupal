@@ -143,7 +143,7 @@ const Carrusell = ({ setSelectedCategory, resetFilters }) => {
   const duplicatedCategories = [...categories, ...categories, ...categories];
 
   return (
-    <div className="w-full bg-gray-50">
+    <div id="categorias" className="w-full bg-gray-50">
       <h2 className="text-xl md:text-3xl font-bold text-start my-4 md:mb-6 text-gray-800 pl-15">
         Categorías
       </h2>
